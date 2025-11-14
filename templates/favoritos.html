@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <title>Página Principal - MercadoVecino</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/carrito_compras.css') }}">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="{{ url_for('static', filename='imagenes/logo.drawio.png') }}" type="image/png">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="{{ url_for('static', filename='imagenes/logo.drawio.png') }}" alt="Logo MercadoVecino">
+    </div>
+    <input type="text" placeholder="Buscar productos..." class="buscador">
+    <select name="filtro" id="filtro">
+        <option value="">Filtrar por:</option>
+        <option value="categoria">Categoría</option>
+        <option value="precio">Precio</option>
+        <option value="fecha">Más recientes</option>
+        <option value="disponibilidad">Disponibilidad</option>
+    </select>
+    <div class="acciones" id="headerActions">
+      <!-- AQUÍ ESTÁ EL CAMBIO PRINCIPAL -->
+      {% if session.get('user_id') %}
+        <!-- Usuario logueado - mostrar nombre y botón de logout -->
+        <span style="color: white; margin-right: 15px;">¡Hola, {{ session.get('user_name') }}!</span>
+        <a href="{{ url_for('logout') }}" class="button-iniciar" onclick="return confirm('¿Estás seguro de cerrar sesión?')">Cerrar Sesión</a>
+      {% else %}
+        <!-- Usuario no logueado - mostrar botones de login y registro -->
+        <a href="{{ url_for('login') }}" class="button-iniciar">Iniciar Sesión</a>
+        <a href="{{ url_for('registrar') }}" class="button-registrar">Registrarse</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <main>
+    <aside class="menu-lateral-iz">
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('index') }}"> 🏠 Página Principal</a></li>
+          <li><a href="{{ url_for('perfil_comprador') }}" class="perfil">👤 Gestión de Perfil</a></li>
+          <li><a href="{{ url_for('carrito_compras') }}">🛒 Carrito de Compras</a></li>
+          <li><a href="{{ url_for('favoritos') }}">⭐ Favoritos</a></li>
+          <li><a href="{{ url_for('historial_compras')}}">📖 Historial de Compras</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <section class="contenido">
+
+    </section>
+
+    <aside class="lateral-der">
+      <h2>¿Cómo funciona?</h2>
+      <br>
+      <div class="info-section">
+        <h3>Explora el catálogo</h3>
+        <p>Navega por las categorías o utiliza el buscador para encontrar productos y servicios disponibles en tu zona.</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Filtra y descubre</h3>
+        <p>Ordena los resultados según tu preferencia: cercanía, precio, popularidad o disponibilidad.</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Agrega a tu carrito o favoritos</h3>
+        <p>Selecciona los productos que te interesen y guárdalos en el carrito para comprar de inmediato o en favoritos para más tarde.</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Recibe soporte cuando lo necesites</h3>
+        <p>Si tienes dudas, accede a la sección de ayuda para recibir asistencia.</p>
+      </div>
+    </aside>
+  </main>
+
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  
+  <!-- Funciones adicionales para navegación -->
+  <script>
+    function irAPerfil() {
+      const userWelcome = document.getElementById('userWelcome');
+      if (!userWelcome) {
+        alert('Debes iniciar sesión para acceder a tu perfil');
+        window.location.href = '/login';
+      } else {
+        window.location.href = '/perfil_comprador';
+      }
+    }
+    
+    function irACarrito() {
+      const userWelcome = document.getElementById('userWelcome');
+      if (!userWelcome) {
+        alert('Debes iniciar sesión para acceder al carrito');
+        window.location.href = '/login';
+      } else {
+        window.location.href = '/carrito_compras';
+      }
+    }
+  </script>
+</body>
+</html>
