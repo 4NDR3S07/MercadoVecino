@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/productos.css">
+    <title>Document</title>
+</head>
+<>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🛍️</div>
+                <span>MiTienda</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Busca productos, marcas y más...">
+                <button class="search-btn">🔍</button>
+            </div>
+            <div class="header-actions">
+                <select class="btn btn-primary">
+                    <option>Filtros</option>
+                    <option>Precio</option>
+                    <option>Popularidad</option>
+                    <option>Más recientes</option>
+                </select>
+                <button class="btn btn-primary">Cerrar Sesión</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Mi Cuenta</h3>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">👤</span>
+                        Gestión de Perfil
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">⭐</span>
+                        Favoritos
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">💬</span>
+                        Chat Directo
+                    </a>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Navegación</h3>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">🕒</span>
+                        Historial de Compras
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">🏠</span>
+                        Página Principal
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">🛒</span>
+                        Carrito de Compras
+                    </a>
+                </div>
+            </aside>
+
+            <main class="content">
+                <h2 class="section-title">Destacados</h2>
+                
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">👟</div>
+                        <h3 class="product-title">Zapatos Tenis By Cuadrado Color Negro Para Hombre</h3>
+                        <div class="product-price">$250.000,00</div>
+                        <div class="product-stock">Stock: 100 disponibles</div>
+                        <div class="product-actions">
+                            <button class="favorite-btn">♡</button>
+                            <div class="quantity-selector">
+                                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart(this)">Agregar</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">👗</div>
+                        <h3 class="product-title">Bufanda de lana roja con diseño de espiga para mujer</h3>
+                        <div class="product-price">$35.900,00</div>
+                        <div class="product-stock">Stock: 100 disponibles</div>
+                        <div class="product-actions">
+                            <button class="favorite-btn">♡</button>
+                            <div class="quantity-selector">
+                                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart(this)">Agregar</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">🧴</div>
+                        <h3 class="product-title">Jean Paul Gaultier Le Male Le Parfum</h3>
+                        <div class="product-price">$450.000,00</div>
+                        <div class="product-stock">Stock: 100 disponibles</div>
+                        <div class="product-actions">
+                            <button class="favorite-btn active">♥</button>
+                            <div class="quantity-selector">
+                                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart(this)">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h3 class="help-title">¿Cómo funciona?</h3>
+                    <div class="help-item">
+                        <h4>Explora el catálogo</h4>
+                        <p>Navega por las categorías o utiliza el buscador para encontrar productos disponibles en tu zona.</p>
+                    </div>
+                    <div class="help-item">
+                        <h4>Filtra y descubre</h4>
+                        <p>Ordena los resultados según tu preferencia: cercanía, precio, popularidad o disponibilidad.</p>
+                    </div>
+                    <div class="help-item">
+                        <h4>Agrega a tu carrito o favoritos</h4>
+                        <p>Selecciona los productos que te interesen y guárdalos en el carrito para comprar de inmediato o en favoritos para más tarde.</p>
+                    </div>
+                    <div class="help-item">
+                        <h4>Recibe soporte cuando lo necesites</h4>
+                        <p>Si tienes dudas, accede a la sección de ayuda para recibir asistencia personalizada.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function changeQuantity(btn, change) {
+            const input = btn.parentElement.querySelector('.quantity-input');
+            let value = parseInt(input.value) + change;
+            if (value < 1) value = 1;
+            if (value > 10) value = 10;
+            input.value = value;
+        }
+
+        function addToCart(btn) {
+            const card = btn.closest('.product-card');
+            const title = card.querySelector('.product-title').textContent;
+            const price = card.querySelector('.product-price').textContent;
+            const quantity = card.querySelector('.quantity-input').value;
+            
+            // Animation effect
+            btn.innerHTML = '✓ Agregado';
+            btn.style.background = '#28a745';
+            
+            setTimeout(() => {
+                btn.innerHTML = 'Agregar';
+                btn.style.background = 'linear-gradient(135deg, #8e44ad, #9b59b6)';
+            }, 2000);
+            
+            // Show notification
+            showNotification(`${quantity} ${title} agregado al carrito`);
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #28a745, #20c997);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: slideInRight 0.5s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Add CSS for notification animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Toggle favorites
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                if (this.classList.contains('active')) {
+                    this.innerHTML = '♥';
+                    showNotification('Producto agregado a favoritos');
+                } else {
+                    this.innerHTML = '♡';
+                    showNotification('Producto removido de favoritos');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

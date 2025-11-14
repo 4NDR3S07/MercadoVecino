@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="background-animation">
+        <!-- Partículas se generarán aquí con JavaScript -->
+    </div>
+
+    <div class="container">
+        <div class="logo">
+            <div class="logo-icon">🛒</div>
+        </div>
+        
+        <h1 class="welcome-title">Bienvenido a MercadoVecino</h1>
+        <p class="welcome-subtitle">Tu marketplace local de confianza</p>
+        
+        <div class="acciones" id="headerActions">
+         <button class="btn btn-iniciar" onclick="window.location.href='../html/login.html'">Iniciar Sesión</button>
+         <button class="btn btn-registrar" onclick="window.location.href='../html/registro.html'">Registrarse</button>
+        </div>
+    </div>
+
+    <!-- Modal de Inicio de Sesión -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('loginModal')">&times;</span>
+                <h2 class="modal-title">Iniciar Sesión</h2>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Correo Electrónico:</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Contraseña:</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Iniciar Sesión</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('registerModal')">&times;</span>
+                <h2 class="modal-title">Registrarse</h2>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="registerName">Nombre Completo:</label>
+                        <input type="text" id="registerName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Correo Electrónico:</label>
+                        <input type="email" id="registerEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Contraseña:</label>
+                        <input type="password" id="registerPassword" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirmar Contraseña:</label>
+                        <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Registrarse</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+   <script>
+        // Crear partículas de fondo
+        function createParticles() {
+            const container = document.querySelector('.background-animation');
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Funciones para manejar modales
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Manejar inicio de sesión
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Aquí irían las validaciones reales
+            if (email && password) {
+                showMessage('¡Inicio de sesión exitoso! Redirigiendo...', 'success');
+                setTimeout(() => {
+                    // Redireccionar a la página principal
+                    window.location.href = '#'; // Cambiar por la URL real
+                }, 2000);
+            }
+        }
+
+        // Manejar registro
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showMessage('Las contraseñas no coinciden', 'error');
+                return;
+            }
+            
+            if (name && email && password) {
+                showMessage('¡Registro exitoso! Bienvenido a MercadoVecino', 'success');
+                setTimeout(() => {
+                    closeModal('registerModal');
+                    // Aquí se podría redireccionar o mostrar login
+                }, 2000);
+            }
+        }
+
+        // Función para mostrar mensajes
+        function showMessage(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                color: white;
+                font-weight: bold;
+                z-index: 2000;
+                animation: slideIn 0.3s ease;
+                background: ${type === 'success' ? 'linear-gradient(45deg, #4CAF50, #45a049)' : 
+                            type === 'error' ? 'linear-gradient(45deg, #f44336, #d32f2f)' : 
+                            'linear-gradient(45deg, #2196F3, #1976D2)'};
+                box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Agregar estilos para animaciones de notificación
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+    </script>
+</body>
+</html>

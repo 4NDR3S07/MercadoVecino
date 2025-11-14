@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/inventario.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🛍️</div>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Barra de Búsqueda">
+                <button class="search-btn">🔍</button>
+            </div>
+            
+            <div class="header-actions">
+                <button class="filters-btn">Filtros ▼</button>
+                <button class="logout-btn">Cerrar Sesión</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="menu-item">
+                    <div class="menu-icon">👤</div>
+                    <span>Gestión de Perfil</span>
+                </div>
+                
+                <div class="menu-item active">
+                    <div class="menu-icon">📦</div>
+                    <span>Inventario</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-icon">💬</div>
+                    <span>Chat Directo</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-icon">🚚</div>
+                    <span>Gestión de Pedidos</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-icon">💰</div>
+                    <span>Gestión de Costos</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-icon">🏠</div>
+                    <span>Página Principal</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-icon">🛒</div>
+                    <span>Carrito de Compras</span>
+                </div>
+            </aside>
+
+            <main class="inventory-section">
+                <div class="inventory-header">
+                    <h1 class="inventory-title">Inventario</h1>
+                    
+                    <div class="action-buttons">
+                        <button class="action-btn">Agregar</button>
+                        <button class="action-btn">Editar</button>
+                        <button class="action-btn">Eliminar</button>
+                        <button class="action-btn">Stock</button>
+                        <button class="action-btn">Organizar por</button>
+                    </div>
+                </div>
+
+                <div class="inventory-table">
+                    <div class="table-header">
+                        <input type="checkbox" class="checkbox">
+                        <span style="flex: 1;">Producto</span>
+                        <span style="width: 60px;">Stock</span>
+                        <span style="width: 80px;">Estado</span>
+                        <span style="width: 80px;">Acción</span>
+                    </div>
+
+                    <div class="product-row">
+                        <input type="checkbox" class="checkbox" checked>
+                        <span class="product-name">Girlink De Cyzone Mujer EDP</span>
+                        <span class="stock-badge">20</span>
+                        <span class="status-active">Activado</span>
+                        <a href="#" class="action-link">Desactivar</a>
+                    </div>
+
+                    <div class="product-row">
+                        <input type="checkbox" class="checkbox">
+                        <span class="product-name">Asad Perfume Árabe Para Hombre 100 ml LATTAFA</span>
+                        <span class="stock-badge">13</span>
+                        <span class="status-active">Activado</span>
+                        <a href="#" class="action-link">Desactivar</a>
+                    </div>
+
+                    <div class="product-row">
+                        <input type="checkbox" class="checkbox">
+                        <span class="product-name">Expression Esika Para Mujer</span>
+                        <span class="stock-badge">15</span>
+                        <span class="status-active">Activado</span>
+                        <a href="#" class="action-link">Desactivar</a>
+                    </div>
+
+                    <div class="product-row">
+                        <input type="checkbox" class="checkbox">
+                        <span class="product-name">Perfume de hombre All Black, (Cyzone)</span>
+                        <span class="stock-badge">30</span>
+                        <span class="status-active">Activado</span>
+                        <a href="#" class="action-link">Desactivar</a>
+                    </div>
+
+                    <div class="product-row">
+                        <input type="checkbox" class="checkbox">
+                        <span class="product-name">Botticario – Perfume amaderado para hombre Styletto EDT</span>
+                        <span class="stock-badge">5</span>
+                        <span class="status-active">Activado</span>
+                        <a href="#" class="action-link">Desactivar</a>
+                    </div>
+
+                    <div class="product-row">
+                        <input type="checkbox" class="checkbox">
+                        <span class="product-name">Botticario – Perfume para hombre Celebre EDT 70/70</span>
+                        <span class="stock-badge">1</span>
+                        <span class="status-active">Activado</span>
+                        <a href="#" class="action-link">Desactivar</a>
+                    </div>
+
+                    <div class="product-row">
+                        <input type="checkbox" class="checkbox">
+                        <span class="product-name">Botticario – Colonia de hombre Only</span>
+                        <span class="stock-badge">30</span>
+                        <span class="status-active">Activado</span>
+                        <a href="#" class="action-link">Desactivar</a>
+                    </div>
+
+                    <div class="product-row">
+                        <input type="checkbox" class="checkbox">
+                        <span class="product-name">Botticario – Perfume para hombre clásica Men EDT</span>
+                        <span class="stock-badge">5</span>
+                        <span class="status-active">Activado</span>
+                        <a href="#" class="action-link">Desactivar</a>
+                    </div>
+
+                    <div class="product-row">
+                        <input type="checkbox" class="checkbox">
+                        <span class="product-name">Perfume Luxury Line Men (Le Petit Perfumes)</span>
+                        <span class="stock-badge">16</span>
+                        <span class="status-active">Activado</span>
+                        <a href="#" class="action-link">Desactivar</a>
+                    </div>
+
+                    <div class="product-row">
+                        <input type="checkbox" class="checkbox">
+                        <span class="product-name">Moschino Pink Fresh EDT Mujer</span>
+                        <span class="stock-badge">19</span>
+                        <span class="status-active">Activado</span>
+                        <a href="#" class="action-link">Desactivar</a>
+                    </div>
+
+                    <div class="product-row">
+                        <input type="checkbox" class="checkbox">
+                        <span class="product-name" style="color: #9ca3af;">Adidas Dynamic Pulse Eau de Toilette (Hombre)</span>
+                        <span class="stock-badge" style="background: #6b7280;">0</span>
+                        <span class="status-inactive">Desactivado</span>
+                        <a href="#" class="action-link">Activar</a>
+                    </div>
+                </div>
+
+                <button class="edit-btn">Editar</button>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Funcionalidad para los checkboxes
+        document.querySelectorAll('.checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const row = this.closest('.product-row');
+                if (this.checked) {
+                    row.style.background = '#f3f4f6';
+                } else {
+                    row.style.background = '';
+                }
+            });
+        });
+
+        // Funcionalidad para los botones de acción
+        document.querySelectorAll('.action-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const row = this.closest('.product-row');
+                const status = row.querySelector('.status-active, .status-inactive');
+                
+                if (this.textContent === 'Activar') {
+                    status.className = 'status-active';
+                    status.textContent = 'Activado';
+                    this.textContent = 'Desactivar';
+                    row.querySelector('.product-name').style.color = '#1f2937';
+                    row.querySelector('.stock-badge').style.background = '#fbbf24';
+                } else {
+                    status.className = 'status-inactive';
+                    status.textContent = 'Desactivado';
+                    this.textContent = 'Activar';
+                    row.querySelector('.product-name').style.color = '#9ca3af';
+                    row.querySelector('.stock-badge').style.background = '#6b7280';
+                }
+            });
+        });
+
+        // Funcionalidad para los elementos del menú
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Funcionalidad de búsqueda
+        document.querySelector('.search-input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            document.querySelectorAll('.product-row').forEach(row => {
+                const productName = row.querySelector('.product-name').textContent.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    row.style.display = 'flex';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

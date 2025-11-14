@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="icon" href="../Assets/imagenes/logo.drawio.png" type="image/png">
+  <title>Página Principal - MercadoVecino</title>
+</head>
+<body>
+  <header>
+    <div class="welcome-section">
+      <div class="logo">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234CAF50'%3E%3Cpath d='M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/%3E%3C/svg%3E" alt="Logo MercadoVecino">
+      </div>
+      <h1 class="welcome-text">Bienvenido a MercadoVecino</h1>
+      <p class="welcome-subtitle">Tu marketplace local de confianza</p>
+    </div>
+    
+    <div class="header-controls">
+      <div class="search-filter-container">
+        <input type="text" placeholder="Buscar productos..." class="buscador" id="buscador">
+        <select name="filtro" id="filtro">
+          <option value="">Filtrar por:</option>
+          <option value="categoria">Categoría</option>
+          <option value="precio">Precio</option>
+          <option value="fecha">Más recientes</option>
+          <option value="disponibilidad">Disponibilidad</option>
+        </select>
+      </div>
+      <div class="acciones" id="headerActions">
+        <button class="button-iniciar" onclick="iniciarSesion()">Iniciar Sesión</button>
+        <button class="button-registrar" onclick="registrarse()">Registrarse</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <aside class="menu-lateral-iz">
+      <nav>
+        <ul>
+          <li><a href="#" class="perfil">👤 Gestión de Perfil</a></li>
+          <li><a href="#" onclick="verCarrito()">🛒 Carrito de Compras</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <section class="contenido">
+      <div id="userWelcome" style="display: none;">
+        <!-- Mensaje de bienvenida para usuarios logueados -->
+      </div>
+
+      <h2>Productos Destacados</h2>
+      <div id="productosContainer">
+        <!-- Aquí se cargarán los productos -->
+      </div>
+    </section>
+
+    <aside class="lateral-der">
+      <h2>¿Cómo funciona?</h2>
+      <div class="info-section">
+        <h3>Explora el catálogo</h3>
+        <p>Navega por las categorías o utiliza el buscador para encontrar productos y servicios disponibles en tu zona.</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Filtra y descubre</h3>
+        <p>Ordena los resultados según tu preferencia: cercanía, precio, popularidad o disponibilidad.</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Agrega a tu carrito o favoritos</h3>
+        <p>Selecciona los productos que te interesen y guárdalos en el carrito para comprar de inmediato o en favoritos para más tarde.</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Recibe soporte cuando lo necesites</h3>
+        <p>Si tienes dudas, accede a la sección de ayuda para recibir asistencia.</p>
+      </div>
+    </aside>
+  </main>
+
+ <script src="../js/index.js"></script>
+</body>
+ <link rel="stylesheet" href="../css/index.css">
+
+</html>

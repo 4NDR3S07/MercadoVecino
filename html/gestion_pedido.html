@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/gestion_pedido.css">
+    <title>Document</title>
+</head>
+<body>
+     <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🛍️</div>
+                <span>MiTienda</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Barra de Búsqueda">
+                <button class="search-btn">🔍</button>
+            </div>
+            <div class="header-actions">
+                <select class="btn btn-primary">
+                    <option>Filtros</option>
+                    <option>Por fecha</option>
+                    <option>Por estado</option>
+                    <option>Por cliente</option>
+                </select>
+                <button class="btn btn-primary">Cerrar Sesión</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Mi Cuenta</h3>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">👤</span>
+                        Gestión de Perfil
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">📦</span>
+                        Inventario
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">💬</span>
+                        Chat Directo
+                    </a>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Gestión</h3>
+                    <a href="#" class="sidebar-item active">
+                        <span class="sidebar-icon">📋</span>
+                        Gestión de Pedidos
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">💰</span>
+                        Gestión de Costos
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">🏠</span>
+                        Página Principal
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">🛒</span>
+                        Carrito de Compras
+                    </a>
+                </div>
+            </aside>
+
+            <main class="content">
+                <div class="page-header">
+                    <h2 class="section-title">Gestión de Pedidos</h2>
+                </div>
+
+                <div class="content-layout">
+                    <div class="main-area">
+                        <div class="filters-section">
+                            <h3 class="filters-title">Filtrar por</h3>
+                            <div class="filters-grid">
+                                <div class="filter-group">
+                                    <label class="filter-label">Estado</label>
+                                    <select class="filter-select" id="statusFilter">
+                                        <option value="">Todos los estados</option>
+                                        <option value="pending">Pendiente</option>
+                                        <option value="delivered">Entregado</option>
+                                        <option value="cancelled">Cancelado</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label class="filter-label">Fecha</label>
+                                    <select class="filter-select" id="dateFilter">
+                                        <option value="">Todas las fechas</option>
+                                        <option value="today">Hoy</option>
+                                        <option value="week">Esta semana</option>
+                                        <option value="month">Este mes</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label class="filter-label">Nombre Cliente</label>
+                                    <select class="filter-select" id="customerFilter">
+                                        <option value="">Todos los clientes</option>
+                                        <option value="andres">Andrés Rodríguez</option>
+                                        <option value="adrian">Adrián Barrera</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label class="filter-label">Método Pago</label>
+                                    <select class="filter-select" id="paymentFilter">
+                                        <option value="">Todos los métodos</option>
+                                        <option value="card">Tarjeta</option>
+                                        <option value="cash">Efectivo</option>
+                                        <option value="transfer">Transferencia</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filter-actions">
+                                <button class="btn-filter btn-apply" onclick="applyFilters()">Aplicar Filtros</button>
+                                <button class="btn-filter btn-clear" onclick="clearFilters()">Limpiar</button>
+                            </div>
+                        </div>
+
+                        <div class="orders-table-container">
+                            <div class="table-header">
+                                <h3 class="table-title">Lista de Pedidos</h3>
+                                <button class="btn-generate-report" onclick="generateReport()">📊 Generar Reporte</button>
+                            </div>
+                            <table class="orders-table" id="ordersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Cliente</th>
+                                        <th>Fecha</th>
+                                        <th>Estado</th>
+                                        <th>Prioridad</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-status="pending" data-customer="andres" data-date="2023-04-04">
+                                        <td>
+                                            <div style="font-weight: bold;">Zapatos Tenis By Cuadrado Color Negro...</div>
+                                            <div style="font-size: 12px; color: #6c757d;">ID: #12345</div>
+                                        </td>
+                                        <td>
+                                            <div class="customer-info">
+                                                <div class="customer-avatar">AR</div>
+                                                <div class="customer-details">
+                                                    <span class="customer-name">Andrés Rodríguez</span>
+                                                    <span class="customer-id">ID: 001</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>04/04/2023</td>
+                                        <td><span class="status-badge status-pending">Pendiente</span></td>
+                                        <td><span class="priority-badge priority-high">Alta</span></td>
+                                        <td style="font-weight: bold; color: #8e44ad;">$250.000</td>
+                                    </tr>
+                                    <tr data-status="pending" data-customer="andres" data-date="2023-04-04">
+                                        <td>
+                                            <div style="font-weight: bold;">Bufanda de lana roja con diseño de espiga...</div>
+                                            <div style="font-size: 12px; color: #6c757d;">ID: #12346</div>
+                                        </td>
+                                        <td>
+                                            <div class="customer-info">
+                                                <div class="customer-avatar">AR</div>
+                                                <div class="customer-details">
+                                                    <span class="customer-name">Andrés Rodríguez</span>
+                                                    <span class="customer-id">ID: 001</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>04/04/2023</td>
+                                        <td><span class="status-badge status-pending">Pendiente</span></td>
+                                        <td><span class="priority-badge priority-normal">Normal</span></td>
+                                        <td style="font-weight: bold; color: #8e44ad;">$35.900</td>
+                                    </tr>
+                                    <tr data-status="delivered" data-customer="adrian" data-date="2023-03-23">
+                                        <td>
+                                            <div style="font-weight: bold;">Expression Esika Para Mujer</div>
+                                            <div style="font-size: 12px; color: #6c757d;">ID: #12347</div>
+                                        </td>
+                                        <td>
+                                            <div class="customer-info">
+                                                <div class="customer-avatar">AB</div>
+                                                <div class="customer-details">
+                                                    <span class="customer-name">Adrián Barrera</span>
+                                                    <span class="customer-id">ID: 002</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>23/03/2023</td>
+                                        <td><span class="status-badge status-delivered">Entregado</span></td>
+                                        <td><span class="priority-badge priority-normal">Normal</span></td>
+                                        <td style="font-weight: bold; color: #8e44ad;">$120.500</td>
+                                    </tr>
+                                    <tr data-status="delivered" data-customer="adrian" data-date="2023-03-13">
+                                        <td>
+                                            <div style="font-weight: bold;">Perfume de hombre All Black, (Cyzone)</div>
+                                            <div style="font-size: 12px; color: #6c757d;">ID: #12348</div>
+                                        </td>
+                                        <td>
+                                            <div class="customer-info">
+                                                <div class="customer-avatar">AB</div>
+                                                <div class="customer-details">
+                                                    <span class="customer-name">Adrián Barrera</span>
+                                                    <span class="customer-id">ID: 002</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>13/03/2023</td>
+                                        <td><span class="status-badge status-delivered">Entregado</span></td>
+                                        <td><span class="priority-badge priority-high">Alta</span></td>
+                                        <td style="font-weight: bold; color: #8e44ad;">$89.900</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="help-section">
+                        <h3 class="help-title">¿Cómo funciona?</h3>
+                        <div class="help-item">
+                            <h4>Explora el catálogo</h4>
+                            <p>Navega por las categorías o utiliza el buscador para encontrar productos y servicios disponibles en tu zona.</p>
+                        </div>
+                        <div class="help-item">
+                            <h4>Filtra y descubre</h4>
+                            <p>Ordena los resultados según tu preferencia: cercanía, precio, popularidad o disponibilidad.</p>
+                        </div>
+                        <div class="help-item">
+                            <h4>Agrega a tu carrito o favoritos</h4>
+                            <p>Selecciona los productos que te interesen y guárdalos en el carrito para comprar de inmediato o en favoritos para más tarde.</p>
+                        </div>
+                        <div class="help-item">
+                            <h4>Recibe soporte cuando lo necesites</h4>
+                            <p>Si tienes dudas, accede a la sección de ayuda para recibir asistencia...</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function applyFilters() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const customerFilter = document.getElementById('customerFilter').value;
+            const rows = document.querySelectorAll('#ordersTable tbody tr');
+
+            rows.forEach(row => {
+                let showRow = true;
+
+                if (statusFilter && row.dataset.status !== statusFilter) {
+                    showRow = false;
+                }
+
+                if (customerFilter && row.dataset.customer !== customerFilter) {
+                    showRow = false;
+                }
+
+                row.style.display = showRow ? '' : 'none';
+            });
+
+            showNotification('Filtros aplicados correctamente');
+        }
+
+        function clearFilters() {
+            document.querySelectorAll('.filter-select').forEach(select => {
+                select.value = '';
+            });
+
+            document.querySelectorAll('#ordersTable tbody tr').forEach(row => {
+                row.style.display = '';
+            });
+
+            showNotification('Filtros limpiados');
+        }
+
+        function generateReport() {
+            showNotification('📊 Generando reporte de pedidos...');
+            
+            // Simulate report generation
+            setTimeout(() => {
+                showNotification('✅ Reporte generado exitosamente');
+            }, 2000);
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #28a745, #20c997);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: slideInRight 0.5s ease;
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Add CSS for notification animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#ordersTable tbody tr');
+
+            rows.forEach(row => {
+                const productName = row.querySelector('td:first-child').textContent.toLowerCase();
+                const customerName = row.querySelector('.customer-name').textContent.toLowerCase();
+                
+                const matches = productName.includes(searchTerm) || customerName.includes(searchTerm);
+                row.style.display = matches ? '' : 'none';
+            });
+        });
+
+        // Auto-update simulation
+        setInterval(() => {
+            const pendingBadges = document.querySelectorAll('.status-pending');
+            if (pendingBadges.length > 0 && Math.random() > 0.7) {
+                const randomBadge = pendingBadges[Math.floor(Math.random() * pendingBadges.length)];
+                randomBadge.className = 'status-badge status-delivered';
+                randomBadge.textContent = 'Entregado';
+                showNotification('📦 Estado de pedido actualizado');
+            }
+        }, 10000);
+    </script>
+</body>
+</html>

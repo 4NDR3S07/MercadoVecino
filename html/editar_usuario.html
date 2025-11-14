@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/editar_usuario.css">
+    <title>Document</title>
+</head>
+<body>
+ <!-- Header -->
+ <div class="header">
+        <div class="logo">
+            <div class="logo-icon">🛒</div>
+            MercadoVecino
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Barra de Búsqueda">
+            <select class="filters-select">
+                <option>Filtros</option>
+                <option>Categoría</option>
+                <option>Precio</option>
+                <option>Fecha</option>
+            </select>
+        </div>
+        <button class="close-session-btn" onclick="cerrarSesion()">Cerrar Sesión</button>
+    </div>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-item active">
+                <div class="sidebar-icon">👤</div>
+                Gestión de Perfil
+            </div>
+            <div class="sidebar-item" onclick="window.location.href='inventario.html'">
+                <div class="sidebar-icon">📦</div>
+                Inventario
+            </div>
+            <div class="sidebar-item" onclick="window.location.href='chat.html'">
+                <div class="sidebar-icon">💬</div>
+                Chat Directo
+            </div>
+            <div class="sidebar-item" onclick="window.location.href='pedidos.html'">
+                <div class="sidebar-icon">🚚</div>
+                Gestión de Pedidos
+            </div>
+            <div class="sidebar-item" onclick="window.location.href='costos.html'">
+                <div class="sidebar-icon">💰</div>
+                Gestión de Costos
+            </div>
+            <div class="sidebar-item" onclick="window.location.href='main.html'">
+                <div class="sidebar-icon">🏠</div>
+                Página Principal
+            </div>
+            <div class="sidebar-item" onclick="window.location.href='carrito.html'">
+                <div class="sidebar-icon">🛒</div>
+                Carrito de Compras
+            </div>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="profile-content">
+            <!-- Profile Header with Background -->
+            <div class="profile-header" id="profileHeader">
+                <button class="change-bg-btn" onclick="cambiarFondo()">📸 Cambiar Fondo</button>
+            </div>
+
+            <!-- Profile Picture -->
+            <div class="profile-picture-container">
+                <div class="profile-picture" id="profilePicture" onclick="cambiarFoto()">
+                    👤
+                    <div class="change-photo-overlay">Cambiar foto</div>
+                </div>
+            </div>
+
+            <!-- Profile Form -->
+            <div class="profile-form">
+                <div class="success-message" id="successMessage">
+                    ✅ Perfil actualizado exitosamente
+                </div>
+
+                <form id="profileForm">
+                    <!-- Información Personal -->
+                    <div class="form-section">
+                        <h3>Información Personal</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombreLocal">Nombre del Local *</label>
+                                <input type="text" id="nombreLocal" name="nombreLocal" value="DominozPizza" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombreCompleto">Nombre Completo *</label>
+                                <input type="text" id="nombreCompleto" name="nombreCompleto" value="Juan Pérez" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción del Local</label>
+                            <textarea id="descripcion" name="descripcion" placeholder="Describe tu negocio, productos y servicios...">Somos una pizzería artesanal con más de 10 años de experiencia, especializada en pizzas tradicionales e innovadoras. Utilizamos ingredientes frescos y de la mejor calidad.</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Información de Contacto -->
+                    <div class="form-section">
+                        <h3>Información de Contacto</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico *</label>
+                                <input type="email" id="email" name="email" value="dominoz@pizza.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" value="+57 300 123 4567">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección del Local *</label>
+                            <input type="text" id="direccion" name="direccion" value="Carrera 12b # 90 K-24" required>
+                        </div>
+                    </div>
+
+                    <!-- Horarios de Atención -->
+                    <div class="form-section">
+                        <h3>Horarios de Atención</h3>
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Día</th>
+                                    <th>Abierto</th>
+                                    <th>Hora Apertura</th>
+                                    <th>Hora Cierre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Lunes</td>
+                                    <td><input type="checkbox" checked></td>
+                                    <td><input type="time" class="time-input" value="08:00"></td>
+                                    <td><input type="time" class="time-input" value="20:00"></td>
+                                </tr>
+                                <tr>
+                                    <td>Martes</td>
+                                    <td><input type="checkbox" checked></td>
+                                    <td><input type="time" class="time-input" value="08:00"></td>
+                                    <td><input type="time" class="time-input" value="20:00"></td>
+                                </tr>
+                                <tr>
+                                    <td>Miércoles</td>
+                                    <td><input type="checkbox" checked></td>
+                                    <td><input type="time" class="time-input" value="08:00"></td>
+                                    <td><input type="time" class="time-input" value="20:00"></td>
+                                </tr>
+                                <tr>
+                                    <td>Jueves</td>
+                                    <td><input type="checkbox" checked></td>
+                                    <td><input type="time" class="time-input" value="08:00"></td>
+                                    <td><input type="time" class="time-input" value="20:00"></td>
+                                </tr>
+                                <tr>
+                                    <td>Viernes</td>
+                                    <td><input type="checkbox" checked></td>
+                                    <td><input type="time" class="time-input" value="08:00"></td>
+                                    <td><input type="time" class="time-input" value="22:00"></td>
+                                </tr>
+                                <tr>
+                                    <td>Sábado</td>
+                                    <td><input type="checkbox" checked></td>
+                                    <td><input type="time" class="time-input" value="10:00"></td>
+                                    <td><input type="time" class="time-input" value="22:00"></td>
+                                </tr>
+                                <tr>
+                                    <td>Domingo</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="time" class="time-input" disabled></td>
+                                    <td><input type="time" class="time-input" disabled></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Políticas -->
+                    <div class="form-section">
+                        <h3>Políticas de Devolución</h3>
+                        <div class="form-group">
+                            <textarea name="politicas" rows="4" placeholder="Describe tus políticas de devolución, cambios, garantías, etc...">Aceptamos devoluciones dentro de las primeras 2 horas después de la entrega si el producto no cumple con los estándares de calidad. Para productos personalizados no se aceptan cambios ni devoluciones salvo defectos de fabricación.</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="cancelarCambios()">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file inputs -->
+    <input type="file" id="profilePhotoInput" accept="image/*" onchange="cargarFotoPerfil(event)">
+    <input type="file" id="backgroundInput" accept="image/*" onchange="cargarFondo(event)">
+
+    <script>
+        // Cargar datos del usuario al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarDatosUsuario();
+        });
+
+        function cargarDatosUsuario() {
+            // Simular carga de datos del usuario desde localStorage o API
+            const nombreUsuario = localStorage.getItem('nombreUsuario') || 'Usuario';
+            const emailUsuario = localStorage.getItem('emailUsuario') || 'usuario@mercadovecino.com';
+            
+            // Actualizar campos con datos del usuario
+            document.getElementById('nombreCompleto').value = nombreUsuario;
+            document.getElementById('email').value = emailUsuario;
+        }
+
+        // Función para cambiar foto de perfil
+        function cambiarFoto() {
+            document.getElementById('profilePhotoInput').click();
+        }
+
+        function cargarFotoPerfil(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const profilePicture = document.getElementById('profilePicture');
+                    profilePicture.style.backgroundImage = `url(${e.target.result})`;
+                    profilePicture.innerHTML = '<div class="change-photo-overlay">Cambiar foto</div>';
+                    mostrarMensaje('Foto de perfil actualizada', 'success');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Función para cambiar fondo
+        function cambiarFondo() {
+            document.getElementById('backgroundInput').click();
+        }
+
+        function cargarFondo(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const profileHeader = document.getElementById('profileHeader');
+                    profileHeader.style.backgroundImage = `url(${e.target.result})`;
+                    profileHeader.classList.add('custom-bg');
+                    mostrarMensaje('Fondo actualizado', 'success');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Manejar envío del formulario
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simular guardado de datos
+            const formData = new FormData(this);
+            
+            // Aquí normalmente enviarías los datos a un servidor
+            console.log('Datos del perfil:', Object.fromEntries(formData));
+            
+            // Mostrar mensaje de éxito
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Ocultar mensaje después de 3 segundos
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 3000);
+            
+            // Actualizar datos en localStorage
+            localStorage.setItem('nombreUsuario', formData.get('nombreCompleto'));
+            localStorage.setItem('emailUsuario', formData.get('email'));
+            
+            mostrarMensaje('Perfil actualizado exitosamente', 'success');
+        });
+
+        function cancelarCambios() {
+            if (confirm('¿Estás seguro de que quieres cancelar los cambios?')) {
+                // Recargar la página para restaurar valores originales
+                window.location.reload();
+            }
+        }
+
+        function cerrarSesion() {
+            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                // Limpiar datos de sesión
+                localStorage.removeItem('usuarioLogueado');
+                localStorage.removeItem('nombreUsuario');
+                localStorage.removeItem('emailUsuario');
+                
+                // Mostrar mensaje
+                mostrarMensaje('Sesión cerrada exitosamente', 'info');
+                
+                // Redireccionar a la página de inicio
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            }
+        }
+
+        function mostrarMensaje(mensaje, tipo = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                color: white;
+                font-weight: bold;
+                z-index: 2000;
+                animation: slideIn 0.3s ease;
+                background: ${tipo === 'success' ? 'linear-gradient(45deg, #4CAF50, #45a049)' : 
+                            tipo === 'error' ? 'linear-gradient(45deg, #f44336, #d32f2f)' : 
+                            'linear-gradient(45deg, #2196F3, #1976D2)'};
+                box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            `;
+            
+            notification.textContent = mensaje;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Manejar checkboxes de horarios
+        document.querySelectorAll('.schedule-table input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const row = this.closest('tr');
+                const timeInputs = row.querySelectorAll('.time-input');
+                timeInputs.forEach(input => {
+                    input.disabled = !this.checked;
+                    if (!this.checked) {
+                        input.value = '';
+                    }
+                });
+            });
+        });
+
+        // Agregar estilos para animaciones
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

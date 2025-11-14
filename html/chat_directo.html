@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/chat_directo.css">
+    <title>Document</title>
+</head>
+<html>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🛍️</div>
+                <span>MiTienda</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Barra de Búsqueda">
+                <button class="search-btn">🔍</button>
+            </div>
+            <div class="header-actions">
+                <select class="btn btn-primary">
+                    <option>Filtros</option>
+                    <option>Conversaciones</option>
+                    <option>Usuarios activos</option>
+                    <option>Archivadas</option>
+                </select>
+                <button class="btn btn-primary">Cerrar Sesión</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Mi Cuenta</h3>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">👤</span>
+                        Gestión de Perfil
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">📦</span>
+                        Inventario
+                    </a>
+                    <a href="#" class="sidebar-item active">
+                        <span class="sidebar-icon">💬</span>
+                        Chat Directo
+                    </a>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Gestión</h3>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">📋</span>
+                        Gestión de Pedidos
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">💰</span>
+                        Gestión de Costos
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">🏠</span>
+                        Página Principal
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <span class="sidebar-icon">🛒</span>
+                        Carrito de Compras
+                    </a>
+                </div>
+            </aside>
+
+            <main class="content">
+                <div class="page-header">
+                    <h2 class="section-title">Chat Directo</h2>
+                </div>
+
+                <div class="content-layout">
+                    <div class="main-area">
+                        <div class="chat-container">
+                            <div class="chat-header">
+                                <div class="chat-avatar">AR</div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-name">Andrés Rodríguez</div>
+                                    <div class="chat-status">En línea</div>
+                                </div>
+                            </div>
+
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="message received">
+                                    <div class="message-avatar">AR</div>
+                                    <div class="message-content">
+                                        <div class="message-bubble received">
+                                            Hola, buenas tardes
+                                            <div class="message-time">3:10 p.m.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="message sent">
+                                    <div class="message-avatar">TU</div>
+                                    <div class="message-content">
+                                        <div class="message-bubble sent">
+                                            Buenas tardes ¿En qué te podemos ayudar?
+                                            <div class="message-time">3:17 p.m.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="message received">
+                                    <div class="message-avatar">AR</div>
+                                    <div class="message-content">
+                                        <div class="message-bubble received">
+                                            ¿Cómo manejan el tema de los Envíos?
+                                            <div class="message-time">3:49 p.m.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="chat-input-container">
+                                <input type="text" class="chat-input" id="messageInput" placeholder="Escribe tu mensaje aquí..." onkeypress="handleEnter(event)">
+                                <button class="chat-send-btn" onclick="sendMessage()">
+                                    <span>➤</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="help-section">
+                        <h3 class="help-title">¿Cómo funciona?</h3>
+                        <div class="help-item">
+                            <h4>Explora el catálogo</h4>
+                            <p>Navega por las categorías o utiliza el buscador para encontrar productos y servicios disponibles en tu zona.</p>
+                        </div>
+                        <div class="help-item">
+                            <h4>Filtra y descubre</h4>
+                            <p>Ordena los resultados según tu preferencia: cercanía, precio, popularidad o disponibilidad.</p>
+                        </div>
+                        <div class="help-item">
+                            <h4>Agrega a tu carrito o favoritos</h4>
+                            <p>Selecciona los productos que te interesen y guárdalos en el carrito para comprar de inmediato o en favoritos para más tarde.</p>
+                        </div>
+                        <div class="help-item">
+                            <h4>Recibe soporte cuando lo necesites</h4>
+                            <p>Si tienes dudas, accede a la sección de ayuda para recibir asistencia...</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+
+            const chatMessages = document.getElementById('chatMessages');
+            const currentTime = new Date().toLocaleTimeString('es', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true 
+            });
+
+            // Add sent message
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message sent';
+            messageElement.innerHTML = `
+                <div class="message-avatar">TU</div>
+                <div class="message-content">
+                    <div class="message-bubble sent">
+                        ${message}
+                        <div class="message-time">${currentTime}</div>
+                    </div>
+                </div>
+            `;
+            
+            chatMessages.appendChild(messageElement);
+            input.value = '';
+
+            // Auto-scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            // Simulate response after 2 seconds
+            setTimeout(() => {
+                hideTypingIndicator();
+                sendAutoResponse();
+            }, 2000);
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function showTypingIndicator() {
+            const chatMessages = document.getElementById('chatMessages');
+            const typingElement = document.createElement('div');
+            typingElement.className = 'message received';
+            typingElement.id = 'typingIndicator';
+            typingElement.innerHTML = `
+                <div class="message-avatar">AR</div>
+                <div class="message-content">
+                    <div class="message-bubble received">
+                        <div class="typing-indicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            chatMessages.appendChild(typingElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingElement = document.getElementById('typingIndicator');
+            if (typingElement) {
+                typingElement.remove();
+            }
+        }
+
+        function sendAutoResponse() {
+            const responses = [
+                "Gracias por tu consulta, te responderé en breve.",
+                "Perfecto, déjame revisar esa información para ti.",
+                "¡Excelente pregunta! Te ayudo con eso ahora mismo.",
+                "Entiendo tu consulta, permíteme verificar los detalles.",
+                "Gracias por contactarnos, enseguida te atiendo."
+            ];
+
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            const chatMessages = document.getElementById('chatMessages');
+            const currentTime = new Date().toLocaleTimeString('es', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true 
+            });
+
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message received';
+            messageElement.innerHTML = `
+                <div class="message-avatar">AR</div>
+                <div class="message-content">
+                    <div class="message-bubble received">
+                        ${randomResponse}
+                        <div class="message-time">${currentTime}</div>
+                    </div>
+                </div>
+            `;
+            
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Auto-scroll to bottom on load
+        window.onload = function() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            if (searchTerm === '') return;
+            
+            showNotification(`🔍 Buscando: "${searchTerm}"`);
+        });
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #28a745, #20c997);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: slideInRight 0.5s ease;
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Add CSS for notification animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
