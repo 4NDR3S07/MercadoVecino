@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Producto - MercadoVecino</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stock.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='imagenes/logo.drawio.png') }}" type="image/png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="topbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='imagenes/logo.drawio.png') }}" alt="Logo" class="logo-img">
+        </div>
+        <div class="user-info">
+            <span>👤 {{ session.get('user_name', 'Vendedor') }}</span>
+        </div>
+        <div class="actions">
+            <a href="{{ url_for('index_vendedor') }}" class="btn btn-secondary">🏠 Inicio</a>
+            <a href="{{ url_for('stock') }}" class="btn btn-secondary">📦 Ver Stock</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-logout">Cerrar Sesión</a>
+        </div>
+    </header>
+
+    <div class="contenido">
+        <div class="contenedor-principal">
+            <!-- Sidebar -->
+            <aside class="menu-lateral-iz">
+                <h3>Menú Vendedor</h3>
+                <nav>
+                    <ul>
+                        <li><a href="{{ url_for('index_vendedor') }}">🏠 Página Principal</a></li>
+                        <li><a href="{{ url_for('perfil_vendedor') }}">👤 Gestión de Perfil</a></li>
+                        <li><a href="{{ url_for('stock') }}">📦 Stock</a></li>
+                        <li><a href="{{ url_for('crear_producto') }}" style="background: #667eea; color: white;">➕ Crear Producto</a></li>
+                        <li><a href="#">🚚 Gestión de Pedidos</a></li>
+                        <li><a href="#">💰 Gestión de Costos</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Contenido principal -->
+            <section class="content">
+                <div class="header-section">
+                    <h1>➕ Crear Nuevo Producto</h1>
+                    <p class="subtitle">Completa el formulario para añadir un producto a tu inventario</p>
+                </div>
+
+                <!-- Mensajes flash -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <!-- Formulario -->
+                <form method="POST" enctype="multipart/form-data" id="formCrearProducto">
+                    <div class="form-grid">
+                        <!-- Nombre -->
+                        <div class="form-group">
+                            <label for="nombre">Nombre del Producto: <span class="required">*</span></label>
+                            <input type="text" id="nombre" name="nombre" required 
+                                   placeholder="Ej: Manzanas Frescas"
+                                   class="form-control">
+                        </div>
+
+                        <!-- Categoría -->
+                        <div class="form-group">
+                            <label for="categoria">Categoría: <span class="required">*</span></label>
+                            <select id="categoria" name="categoria" required class="form-control">
+                                <option value="">Selecciona una categoría</option>
+                                {% for cat in categorias %}
+                                    <option value="{{ cat }}">{{ cat }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Precio -->
+                        <div class="form-group">
+                            <label for="precio">Precio (COP): <span class="required">*</span></label>
+                            <input type="number" id="precio" name="precio" required 
+                                   min="0.01" step="0.01"
+                                   placeholder="0.00"
+                                   class="form-control">
+                        </div>
+
+                        <!-- Stock -->
+                        <div class="form-group">
+                            <label for="stock">Stock Inicial: <span class="required">*</span></label>
+                            <input type="number" id="stock" name="stock" required 
+                                   min="0" 
+                                   placeholder="0"
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="descripcion">Descripción del Producto:</label>
+                        <textarea id="descripcion" name="descripcion" rows="4"
+                                  placeholder="Describe tu producto detalladamente..."
+                                  class="form-control"></textarea>
+                    </div>
+
+                    <!-- Imágenes -->
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="imagenes">Imágenes del Producto:</label>
+                        <div class="file-upload">
+                            <input type="file" id="imagenes" name="imagenes" multiple 
+                                   accept="image/*"
+                                   class="file-input">
+                            <label for="imagenes" class="file-label">
+                                📸 Selecciona imágenes (PNG, JPG, JPEG, GIF)
+                            </label>
+                            <small id="preview-info" class="preview-info"></small>
+                        </div>
+                        <div id="preview-container" class="preview-container"></div>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="form-actions" style="margin-top: 30px;">
+                        <a href="{{ url_for('stock') }}" class="btn-secondary">
+                            ❌ Cancelar
+                        </a>
+                        <button type="submit" class="btn-primary">
+                            ✅ Crear Producto
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <style>
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .file-upload {
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: block;
+            padding: 20px;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            background: #f8f9fa;
+            transition: 0.3s;
+        }
+
+        .file-label:hover {
+            background: #e7f3ff;
+            border-color: #764ba2;
+        }
+
+        .preview-info {
+            display: block;
+            margin-top: 8px;
+            color: #667eea;
+            font-size: 12px;
+        }
+
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .preview-item {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .form-actions button,
+        .form-actions a {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #6406bd;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a05a0;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+    </style>
+
+    <script>
+        // Vista previa de imágenes
+        document.getElementById('imagenes').addEventListener('change', function(e) {
+            const container = document.getElementById('preview-container');
+            const info = document.getElementById('preview-info');
+            container.innerHTML = '';
+            
+            const files = Array.from(this.files);
+            info.textContent = files.length > 0 ? `${files.length} imagen(es) seleccionada(s)` : '';
+            
+            files.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const div = document.createElement('div');
+                    div.className = 'preview-item';
+                    div.innerHTML = `<img src="${event.target.result}" alt="Imagen ${index + 1}">`;
+                    container.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        // Validar formulario antes de enviar
+        document.getElementById('formCrearProducto').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value.trim();
+            const precio = parseFloat(document.getElementById('precio').value);
+            const stock = parseInt(document.getElementById('stock').value);
+            
+            if (!nombre) {
+                alert('El nombre es obligatorio');
+                return;
+            }
+            
+            if (isNaN(precio) || precio <= 0) {
+                alert('El precio debe ser mayor a 0');
+                return;
+            }
+            
+            if (isNaN(stock) || stock < 0) {
+                alert('El stock no puede ser negativo');
+                return;
+            }
+            
+            this.submit();
+        });
+    </script>
+</body>
+</html>
